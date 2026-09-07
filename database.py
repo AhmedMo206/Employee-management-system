@@ -60,16 +60,6 @@ class Database:
         self.cursor.execute("SELECT COUNT(*) FROM users")
         if self.cursor.fetchone()[0] == 0:
             self.create_user("admin", "admin123", "admin")
-
-        # Default departments
-        defaults = ["Human Resources", "Engineering", "Sales",
-                    "Marketing", "Finance", "Operations"]
-        for d in defaults:
-            try:
-                self.cursor.execute(
-                    "INSERT INTO departments (name) VALUES (?)", (d,))
-            except sqlite3.IntegrityError:
-                pass
         self.conn.commit()
 
     # ------------------------------------------------------------------ #
